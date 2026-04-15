@@ -32,7 +32,7 @@ jobs:
       run: |
         git config --global user.name "GitHub Action"
         git config --global user.email "action@github.com"
-        git add preprocessing/processed_dataset.csv
+        git add preprocessing/premier_league_complete_stats_until31thGameDayOnSeason2025-26_preprocessing.csv
         git commit -m "Update processed dataset [skip ci]" || echo "No changes to commit"
         git push
       env:

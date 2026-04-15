@@ -57,7 +57,7 @@ def run_automation(file_path, output_dir='preprocessing'):
     # ubah array ke DataFrame
     X_df = pd.DataFrame(X_transformed.toarray() if hasattr(X_transformed, 'toarray') else X_transformed)
     X_df['target_rating'] = y.values
-    X_df.to_csv(os.path.join(output_dir, 'processed_data.csv'), index=False)
+    X_df.to_csv(os.path.join(output_dir, 'premier_league_complete_stats_until31thGameDayOnSeason2025-26_preprocessing.csv'), index=False)
 
        
     print(f"Preprocessing completed. Dataset disimpan di: {output_dir}")
