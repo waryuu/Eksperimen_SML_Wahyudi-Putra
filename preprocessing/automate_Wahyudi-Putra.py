@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 from sklearn.compose import ColumnTransformer
@@ -14,7 +15,7 @@ def handle_outliers(df, columns):
         df_outlier[col] = df_outlier[col].clip(lower=lower_bound, upper=upper_bound)
     return df_outlier
 
-def run_automation(file_path, output_path='processed_data.csv'):
+def run_automation(file_path, output_dir='preprocessing'):
     
     # 1. Load Data
     df = pd.read_csv(file_path, encoding='latin-1')
@@ -56,12 +57,12 @@ def run_automation(file_path, output_path='processed_data.csv'):
     # ubah array ke DataFrame
     X_df = pd.DataFrame(X_transformed.toarray() if hasattr(X_transformed, 'toarray') else X_transformed)
     X_df['target_rating'] = y.values
-    X_df.to_csv(output_path, index=False)
+    X_df.to_csv(os.path.join(output_dir, 'processed_data.csv'), index=False)
 
        
-    print(f"Preprocessing completed. Dataset berhasil disimpan di: {output_path}")
-    return X_transformed, y, preprocessor  
-
+    print(f"Preprocessing completed. Dataset disimpan di: {output_dir}")
+    return X_transformed, y, preprocessor
+    
 if __name__ == "__main__":
     DATA_FILE = 'premier_league_complete_stats_until31thGameDayOnSeason2025-26_raw.csv'
     X, y, transformer = run_automation(DATA_FILE)
