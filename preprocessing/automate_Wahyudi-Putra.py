@@ -53,9 +53,14 @@ def run_automation(file_path, output_dir='preprocessing'):
     X_transformed = preprocessor.fit_transform(X)
     
          
-    # Simpan data hasil transformasi ke CSV
-    # ubah array ke DataFrame
-    X_df = pd.DataFrame(X_transformed.toarray() if hasattr(X_transformed, 'toarray') else X_transformed)
+        # Ambil nama fitur hasil transformasi
+    feature_names = preprocessor.get_feature_names_out()
+        # ubah array ke DataFrame
+    X_df = pd.DataFrame(
+        X_transformed.toarray() if hasattr(X_transformed, 'toarray') else X_transformed,
+        columns=feature_names
+    )
+
     X_df['target_rating'] = y.values
     X_df.to_csv(os.path.join(output_dir, 'premier_league_complete_stats_until31thGameDayOnSeason2025-26_preprocessing.csv'), index=False)
 
